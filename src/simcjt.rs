@@ -22,7 +22,7 @@ fn read_next_arg<T: std::str::FromStr>(o: Option<String>, expected: &str) -> T {
 }
 
 fn main() {
-    eprintln!("5746c5059a971eca64fdd1bf9ffb58190d57f781"); 
+    println!("5746c5059a971eca64fdd1bf9ffb58190d57f781"); 
     let mut input = std::env::args().skip(1);
     let (m, delta_p, p_hat, p_min, pi, l, k_pbs, s) = (
         read_next_arg::<usize>(input.next(), "m"),
@@ -57,14 +57,14 @@ fn main() {
     let (mut prev, mut node) = (root, root);
     let mut trace = vec![root];
     let (mut t, mut back_at) = (1,0);
-    eprintln!("{root:?}");
+    println!("{root:?}");
 
     loop {
         let (a, b) = node;
 
         if back_at == 300 {
-            eprintln!(":: threshold reached");
-            eprintln!("{trace:?}");
+            println!(":: threshold reached");
+            println!("{trace:?}");
             print!("{m:?};{delta_p:?};{p_hat:?};{p_min:?};",);
             println!("{pi:?};{k_pbs:?};{l:?};{bound:?};{b:?};({a:?},{b:?})");
             return println!("m;delta_p;p_hat;p_min;pi;k;l;bound;n");
@@ -72,7 +72,7 @@ fn main() {
 
 
         if rng.sample(u) < (1f32 / (ub as f32).ln()) {
-            eprint!("tt {k:?} {node:?} ...");
+            print!("tt {k:?} {node:?} ...");
             match b == a + 1 {
                 true => {
                     match node == prev {
@@ -91,9 +91,9 @@ fn main() {
                         .sum::<usize>() as f32
                         / k as f32;
 
-                    eprintln!(" {h_a_k:?} {h_b_k:?}");
+                    println!(" {h_a_k:?} {h_b_k:?}");
                     if (h_a_k < 0.5f32) && (0.5f32 < h_b_k) {
-                        eprintln!("{trace:?}");
+                        println!("{trace:?}");
                         print!("{m:?};{delta_p:?};{p_hat:?};{p_min:?};",);
                         println!("{pi:?};{k_pbs:?};{l:?};{bound:?};{a:?}");
                         return println!("m;delta_p;p_hat;p_min;pi;k;l;bound;n");
@@ -106,15 +106,15 @@ fn main() {
                             .map(|_| coin_toss(*n_agents, delta_p, p_min, k_pbs, l, m, p_hat, pi))
                             .sum::<usize>();
                         let v = h as f32 / k as f32;
-                        eprint!(" {v:?}");
+                        print!(" {v:?}");
                         (0.25f32 <= v) && (v <= 0.75f32)
                     }) {
-                        eprintln!("\n{trace:?}");
+                        println!("\n{trace:?}");
                         print!("{m:?};{delta_p:?};{p_hat:?};{p_min:?};",);
                         println!("{pi:?};{k_pbs:?};{l:?};{bound:?};{n:?}");
                         return println!("m;delta_p;p_hat;p_min;pi;k;l;bound;n");
                     }
-                    eprintln!();
+                    println!();
 
                     back_at = 0;
                 }
@@ -134,7 +134,7 @@ fn main() {
             true => {
                 trace.pop();
                 node = unsafe { *trace.last().unwrap_unchecked() };
-                eprintln!("B {:?} {t:?} {a_flips:?} {b_flips:?} {back_at:?}", node);
+                println!("B {:?} {t:?} {a_flips:?} {b_flips:?} {back_at:?}", node);
             }
             _ => {
                 let c = ((a + b) as f32 / 2f32).floor() as usize;
@@ -142,19 +142,19 @@ fn main() {
                     1 => {
                         prev = node;
                         node = (a, c); // left child
-                        eprint!("L");
+                        print!("L");
                     }
                     0 => {
                         prev = node;
                         node = (c, b); // right child
-                        eprint!("R");
+                        print!("R");
                     }
                     _ => panic!("coin toss > 1"),
                 }
                 if unsafe { *trace.last().unwrap_unchecked() } != node {
                     trace.push(node);
                 }
-                eprintln!(" {:?} {t:?} {a_flips:?} {b_flips:?} {back_at:?}", node);
+                println!(" {:?} {t:?} {a_flips:?} {b_flips:?} {back_at:?}", node);
             }
         }
 
