@@ -1,0 +1,16 @@
+[package]
+name = "simcjt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8.5"
+rand_distr = "0.4.3"
+rayon = "1.7.0"
+
+# RUSTFLAGS='-C target-feature=+crt-static' cargo build --release --target x86_64-unknown-linux-gnu
+
+[[bin]]
+name = "simcjt"
+path = "src/simcjt.rs"
+
