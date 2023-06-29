@@ -13,7 +13,7 @@ if __name__ == "__main__":
         "#SBATCH --mail-user=doru415d@tu-dresden.de",
     ]
 
-    m, p_hat, p_min, k, l, s, rate, name, dest, bin = (
+    m, p_hat, p_min, k, l, s, rate, name = (
         int(sys.argv[4]),
         float(sys.argv[5]),
         float(sys.argv[6]),
@@ -22,10 +22,8 @@ if __name__ == "__main__":
         int(sys.argv[9]),
         int(sys.argv[10]),
         sys.argv[11],
-        sys.argv[12],
-        sys.argv[13],
     )
-    print(n_tasks, cpus_per_task, time, m, p_hat, p_min, k, l, s, rate, name, dest, bin)
+    print(n_tasks, cpus_per_task, time, m, p_hat, p_min, k, l, s, rate, name)
 
     for i in range(1, rate + 1):
         delta_p = i / rate
@@ -35,8 +33,8 @@ if __name__ == "__main__":
             name_ = f"{name}-{i}_{m}_{delta_p}_{p_hat}_{p_min}_{pi}_{k}_{l}_{s}-{rate}_{f}_{t}"
             job = preamble + [f"#SBATCH --job-name={name}"]
             job.append(
-                f"srun ./{bin} {m} {delta_p} {p_hat} {p_min} {pi} {k} {l} {s} > out-{dest}/{name_}.out",
+                f"srun ./simcjt {m} {delta_p} {p_hat} {p_min} {pi} {k} {l} {s} > out-{name}-{k}-{l}-{s}/{name_}.out",
             )
 
-            with open(f"{dest}/{name_}.sh", "w") as g:
+            with open(f"experiments/scripts/{name}-{k}-{l}-{s}/{name_}.sh", "w") as g:
                 g.write("\n".join(job))
