@@ -1,6 +1,7 @@
 # Condorcet Jury Theorem Simulations
-This repository contains data and code reproduce experiments from the *To Lead
-or to be Led: A Generalized Condorcet Jury Theorem under Dependence* paper.
+This repository contains data and code to reproduce experiments from the *To
+Lead or to be Led: A Generalized Condorcet Jury Theorem under Dependence*
+paper.
 
 - The binary used for experiments can be bound [here](https://github.com/drwadu/simcjt/blob/master/experiments/bin/simcjt);
 - results can be found [here](https://github.com/drwadu/simcjt/tree/master/experiments/csvs); and
