@@ -1,1 +1,0 @@
-target/release/simcjt 2 0.5 1.0 0.9 0.3 1000 3 300 > experiments/out/fixed_deltap/40_2_0.5_1.0_0.9_0.3_1000_3.out

@@ -1,7 +1,0 @@
-                            m p_hat p_min k l s rate nem dest bin
-python3 generate.py 1 8 168 2 0.0 0.9 3 10000 s00 25 s1 ds1 simcjt
-python3 generate.py 1 8 168 2 0.3 0.9 3 10000 s00 25 s2 ds2 simcjt
-python3 generate.py 1 8 168 2 0.7 0.9 3 10000 s00 25 s3 ds3 simcjt
-python3 generate.py 1 8 168 2 1.0 0.9 3 10000 s00 25 s4 ds4 simcjt
----
-fphf s
